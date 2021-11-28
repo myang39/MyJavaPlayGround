@@ -1,14 +1,16 @@
+package coinbase;
+
 import javafx.scene.layout.Priority;
 
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class Coinbase {
+public class BuySell {
     public static void main(String[] args) {
 
     }
 
-    public List<Integer> fillOrder(List<Integer> buyOrder, List<Integer> sellOrder) {
+    public List<Integer> fillOrder (List<Integer> buyOrder, List<Integer> sellOrder) {
         //sanity check
         List<Integer> ret;
         if (buyOrder == null || sellOrder == null) {

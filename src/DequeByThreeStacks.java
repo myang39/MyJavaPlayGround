@@ -1,16 +1,23 @@
 import java.util.LinkedList;
 
 public class DequeByThreeStacks {
-    private static LinkedList<Integer> stackFirst;
-    private static LinkedList<Integer> stackLast;
-    private static LinkedList<Integer> stackTemp;
+    private LinkedList<Integer> stackFirst;
+    private LinkedList<Integer> stackLast;
+    private LinkedList<Integer> stackTemp;
+
+    DequeByThreeStacks() {
+        stackFirst = new LinkedList<>();
+        stackLast = new LinkedList<>();
+        stackTemp = new LinkedList<>();
+    }
 
     public static void main(String[] args) {
-            // Write your solution here.
-            stackFirst = new LinkedList<>();
-            stackLast = new LinkedList<>();
-            stackTemp = new LinkedList<>();
-        }
+            // Write your solution here
+        DequeByThreeStacks dbts = new DequeByThreeStacks();
+        dbts.offerFirst(1);
+        dbts.offerFirst(2);
+        System.out.println(dbts.pollFirst());
+    }
 
         public void offerFirst(int element) {
             stackFirst.offerFirst(element);
@@ -21,7 +28,7 @@ public class DequeByThreeStacks {
         }
 
         public Integer pollFirst() {
-            if(this.isEmpty()) {
+            if(isEmpty()) {
                 return null;
             }
 
@@ -30,7 +37,7 @@ public class DequeByThreeStacks {
         }
 
         public Integer pollLast() {
-            if(this.isEmpty()) {
+            if(isEmpty()) {
                 return null;
             }
 
@@ -39,7 +46,7 @@ public class DequeByThreeStacks {
         }
 
         public Integer peekFirst() {
-            if(this.isEmpty()) {
+            if(isEmpty()) {
                 return null;
             }
 
@@ -60,7 +67,7 @@ public class DequeByThreeStacks {
         }
 
         public Integer peekLast() {
-            if(this.isEmpty()) {
+            if(isEmpty()) {
                 return null;
             }
 
@@ -85,6 +92,6 @@ public class DequeByThreeStacks {
         }
 
         public boolean isEmpty() {
-            return this.size() == 0;
+            return size() == 0;
         }
 }
