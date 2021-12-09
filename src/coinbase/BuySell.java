@@ -1,7 +1,5 @@
 package coinbase;
 
-import javafx.scene.layout.Priority;
-
 import java.util.List;
 import java.util.PriorityQueue;
 

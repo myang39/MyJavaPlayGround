@@ -1,13 +1,9 @@
 package coinbase;
 
-import sun.net.www.http.HttpClient;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CurrencyExchange {
     public static void main(String[] args) throws IOException {
