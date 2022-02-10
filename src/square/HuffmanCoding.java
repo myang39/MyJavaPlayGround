@@ -1,21 +1,28 @@
 package square;
 
-import util.Tree;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class HuffmanCoding {
   public static void main(String[] args) {
     String s = "Hello World!";
-    s = "Designing a system that supports millions of users is challenging, " +
-            "and it is a journey that requires continuous refinement and endless " +
-            "improvement. In this chapter, we build a system that supports a single " +
-            "user and gradually scale it up to serve millions of users. After " +
-            "reading this chapter, you will master a handful of techniques that " +
-            "will help you to crack the system design interview questions.";
+    s = "Redis (/ˈrɛdɪs/;[6][7] Remote Dictionary Server)[6] is an in-memory dat" +
+            "a structure store, used as a distributed, in-memory key–value " +
+            "database, cache and message broker, with optional durability. " +
+            "Redis supports different kinds of abstract data structures, " +
+            "such as strings, lists, maps, sets, sorted sets, HyperLogLogs, " +
+            "bitmaps, streams, and spatial indices. " +
+            "The project was developed and maintained by Salvatore Sanfilippo." +
+            "[8] From 2015 until 2020, he led a project core team sponsored by " +
+            "Redis Labs.[9] Salvatore Sanfilippo left Redis as the maintainer " +
+            "in 2020.[10] It is open-source software released under a BSD " +
+            "3-clause license.[5] In 2021, not long after the original author " +
+            "and main maintainer left, Redis Labs dropped the Labs from its " +
+            "name and now redis, the open source DB as well as Redis Labs, " +
+            "the commercial company, are referred to as \"redis\".[11]";
     String encoded = encode(s);
     System.out.println(encoded);
-//    levelOrderPrint(root);
     System.out.println(decode(encoded));
   }
 
@@ -33,50 +40,8 @@ public class HuffmanCoding {
     }
   }
 
-  public static void levelOrderPrint(Node root) {
-    if (root == null) {
-      return;
-    }
-
-    Queue<Node> q = new LinkedList<>();
-    q.offer(root);
-    int level = 0;
-    List<List<Node>> lists = new ArrayList<>();
-    while (q.size() > 0) {
-      int size = q.size();
-      List<Node> list;
-      if (lists.size() <= level) {
-        list = new ArrayList<>();
-        lists.add(list);
-      }
-      list = lists.get(level);
-      for (int i = 0; i < size; i++) {
-        Node cur = q.poll();
-        list.add(cur);
-        if (cur != null) {
-          q.offer(cur.left);
-          q.offer(cur.right);
-        }
-      }
-      level++;
-    }
-
-    System.out.println("print huffman tree:");
-    System.out.println("levels: " + lists.size());
-    for (int i = 0; i < lists.size(); i++) {
-      List<Node> list = lists.get(i);
-      for (int j = 0; j < list.size(); j++) {
-        Node n = list.get(j);
-        if (n != null) {
-          System.out.print(list.get(j).c + " " + list.get(j).freq + ", ");
-        }
-      }
-      System.out.println();
-    }
-  }
-
   static Node root;
-  static Map<Character, String> huffmanMap;
+  static Map<Character, String> huffmanMap = new HashMap<>();
 
   private static void createHuffmanTree(String s) {
     Map<Character, Integer> freqMap = new HashMap<>();
@@ -92,41 +57,35 @@ public class HuffmanCoding {
       pq.offer(n);
     }
 
-    while (pq.size() > 1) {
+    while(pq.size() > 1) {
       Node l = pq.poll();
       Node r = pq.poll();
-      Node parent = new Node(' ', l.freq + r.freq, l, r);
-      pq.offer(parent);
+      Node p = new Node(' ', l.freq + r.freq, l, r);
+      pq.offer(p);
     }
     root = pq.poll();
-//    System.out.print("root " + root.c + " " + root.freq);
   }
 
   private static void createHuffmanMap(Node root, StringBuilder sb) {
-    // huffmanMap = new HashMap<>(); !!! this would ditch the current map and create
-    //  a new map everytime.
     if (root.left == null && root.right == null) {
-//      System.out.println("root.c + code: " + root.c + " : " + sb.toString());
-
       huffmanMap.put(root.c, sb.toString());
-//      System.out.println("print huffmanMap:");
-//      util.Maps.printCharacterString(huffmanMap);
       return;
     }
-
-    createHuffmanMap(root.left, sb.append('0'));
+    sb.append('0');
+    createHuffmanMap(root.left, sb);
     sb.deleteCharAt(sb.length() - 1);
 
-    createHuffmanMap(root.right, sb.append('1'));
+    sb.append('1');
+    createHuffmanMap(root.right, sb);
     sb.deleteCharAt(sb.length() - 1);
   }
 
   public static String encode(String s) {
+    if (s == null || s == "") {
+      return s;
+    }
     createHuffmanTree(s);
-    huffmanMap = new HashMap<>();
     createHuffmanMap(root, new StringBuilder());
-//    System.out.println("huffman map:");
-//    util.Maps.printCharacterString(huffmanMap);
     StringBuilder sb = new StringBuilder();
     for (char c : s.toCharArray()) {
       sb.append(huffmanMap.get(c));
@@ -135,6 +94,9 @@ public class HuffmanCoding {
   }
 
   public static String decode(String s) {
+    if (s == null || s == "") {
+      return s;
+    }
     StringBuilder sb = new StringBuilder();
     Node cur = root;
     for (char c : s.toCharArray()) {

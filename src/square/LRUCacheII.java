@@ -5,9 +5,16 @@ import java.util.Map;
 
 public class LRUCacheII {
   public static void main(String[] args) {
-
+    LRUCacheII l = new LRUCacheII(3);
+    l.put(1, 1);
+    l.put(2, 2);
+    l.put(3, 3);
+    System.out.println(l.get(2));
+    l.put(4, 4);
+    System.out.println(l.get(1));
   }
-  class Node { // using default constructor
+
+  static class Node {
     int key;
     int val;
     Node prev;
@@ -16,15 +23,15 @@ public class LRUCacheII {
 
   int capacity;
   int size;
+  Map<Integer, Node> cache; // key to Node
   Node head;
   Node tail;
-  Map<Integer, Node> cache = new HashMap<>();
 
   public LRUCacheII(int capacity) {
     this.capacity = capacity;
+    cache = new HashMap<>();
     head = new Node();
     tail = new Node();
-
     head.next = tail;
     tail.prev = head;
   }
@@ -34,7 +41,6 @@ public class LRUCacheII {
     if (node == null) {
       return -1;
     }
-
     moveToHead(node);
     return node.val;
   }
@@ -42,15 +48,11 @@ public class LRUCacheII {
   public void put(int key, int val) {
     Node node = cache.get(key);
     if (node == null) {
-      Node newNode = new Node();
-      newNode.key = key;
-      newNode.val = val;
-
-      // add node to list
-      addNode(newNode);
-      // add node to cache
-      cache.put(key, newNode);
-
+      node = new Node();
+      node.key = key;
+      node.val = val;
+      cache.put(key, node);
+      addNode(node);
       size++;
       if (size > capacity) {
         Node lastNode = tail.prev;
@@ -65,13 +67,11 @@ public class LRUCacheII {
   }
 
   private void addNode(Node node) {
-    // always add node after the head
+    // always add node after head
     Node next = head.next;
-
+    head.next = node;
     node.prev = head;
     node.next = next;
-
-    head.next = node;
     next.prev = node;
   }
 
@@ -81,12 +81,10 @@ public class LRUCacheII {
 
     prev.next = next;
     next.prev = prev;
-  }
+  };
 
   private void moveToHead(Node node) {
     removeNode(node);
     addNode(node);
   }
-
-
 }

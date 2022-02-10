@@ -19,7 +19,7 @@ public class HistoryEntryList {
   }
 
   public static int peoplesInTheMeeting(String [][] list, int targetTime) {
-    Map<String, Integer> map = new HashMap<>();
+//    Map<String, Integer> map = new HashMap<>();
     // Is the list sorted by timestamp? Can a person enter twice without exit in between?
     // if not, we need to sort the list first
     Arrays.sort(list, (a, b) -> Integer.parseInt(a[0]) - Integer.parseInt(b[0]));
@@ -31,7 +31,7 @@ public class HistoryEntryList {
       int time = Integer.parseInt(e[0]);
       String key = e[1];
       String action = e[2];
-      if (time > targetTime) {
+      if (time > targetTime) {// clarify: does equal count?
         break;
       }
       if (action.equals("ENTER")) {

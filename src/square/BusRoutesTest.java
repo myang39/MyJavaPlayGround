@@ -13,6 +13,6 @@ class BusRoutesTest {
     };
     int source = 6;
     int target = 1;
-    assertEquals(2, BusRoutes.numBusesToDestination(routes, source, target));
+    assertEquals(2, lc815_BusRoutes.numBusesToDestination(routes, source, target));
   }
 }

@@ -59,7 +59,7 @@ public class SocksPair {
 
   // Move left and right lift out of the map, seems more clear
   public static int[][] socksParingII(Sock[] socks) {
-    // key is color, array 0 is left, array 2 is right, list is ids
+    // key is color, array 0 is left, array 2 is right, inner list is ids
     List<Map<String, List<Integer>>> maps = new ArrayList<>();
     maps.add(new HashMap<>());
     maps.add(new HashMap<>());
