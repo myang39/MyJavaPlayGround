@@ -1,4 +1,4 @@
-package datastructure;
+package datastructureAndAlgo;
 
 // base on https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/datastructures/unionfind/UnionFind.java
 /**

@@ -1,4 +1,4 @@
-package datastructure.hashcode;
+package datastructureAndAlgo.hashcode;
 
 import java.util.Objects;
 

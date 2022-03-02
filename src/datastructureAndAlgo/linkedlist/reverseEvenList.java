@@ -1,4 +1,4 @@
-package datastructure.linkedlist;
+package datastructureAndAlgo.linkedlist;
 
 public class reverseEvenList {
     public static class ListNode {
