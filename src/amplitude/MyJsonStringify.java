@@ -1,4 +1,5 @@
 package amplitude;
+
 import org.json.JSONObject;
 
 import java.util.*;
