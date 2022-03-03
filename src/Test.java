@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.IntStream;
 
 public class Test {
     public static void main(String[] args) {
@@ -21,6 +22,7 @@ public class Test {
             lists.add(new String(board[i]));
         }
         System.out.println(lists.toString().replace(",", "\n"));
+
     }
     static class TreeNode {
         int val;

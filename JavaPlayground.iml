@@ -23,7 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="java-json" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.8.1">
         <CLASSES>
@@ -56,5 +55,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="json-simple-1.1.1-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="json" level="project" />
   </component>
 </module>

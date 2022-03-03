@@ -45,9 +45,9 @@ public class SocksPair {
         map.get(s.color).add(new LinkedList<>());
         map.get(s.color).add(new LinkedList<>());
         map.get(s.color).get(s.dir).add(s.id);
-      } else if (map.get(s.color).get(s.dir ^ 1).size() != 0) {
-        ret.add(new int[]{map.get(s.color).get(s.dir ^ 1).get(0), s.id});
-        map.get(s.color).get(s.dir ^ 1).remove(0);
+      } else if (map.get(s.color).get(1 - s.dir).size() != 0) {
+        ret.add(new int[]{map.get(s.color).get(1 - s.dir).get(0), s.id});
+        map.get(s.color).get(1 - s.dir).remove(0);
         continue;
       } else {
         map.get(s.color).get(s.dir).add(s.id);
@@ -68,7 +68,7 @@ public class SocksPair {
 
     for (Sock s : socks) {
       String color = s.color;
-      Map<String, List<Integer>> oppositeMap = maps.get(1 ^ s.dir);
+      Map<String, List<Integer>> oppositeMap = maps.get(1 - s.dir);
 
       if (oppositeMap.get(color) != null && oppositeMap.get(color).size() > 0) {
         ret.add(new int[]{oppositeMap.get(color).get(0), s.id});
